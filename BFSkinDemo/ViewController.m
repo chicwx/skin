@@ -28,6 +28,8 @@
 
     [self prepareView];
     
+    [self performanceTest];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +55,19 @@
     [self.bottomImageView autoSetDimensionsToSize:CGSizeMake(200, 50)];
     [self.bottomImageView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
     [self.bottomImageView autoAlignAxisToSuperviewAxis:ALAxisVertical];
+}
+
+- (void)performanceTest {
+    for (int i = 0; i < 100; i++) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(i, 300+i, 100, 50)];
+        [button setTitle:[NSString stringWithFormat:@"B%@",@(i)] forState:UIControlStateNormal];
+        button.bf_skinStyle = @"skin_submit_button";
+        [self.view addSubview:button];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 350+2*i, 100, 30)];
+        imageView.bf_skinStyle = @"skin_index_bottom_image";
+        [self.view addSubview:imageView];
+    }
 }
 
 #pragma mark - Action
