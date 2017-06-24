@@ -1,0 +1,16 @@
+//
+//  BFSkin-Prefix.pch
+//  BFSkinDemo
+//
+//  Created by wangxiao on 2017/6/22.
+//  Copyright © 2017年 tuniu. All rights reserved.
+//
+
+#ifndef BFSkin_Prefix_pch
+#define BFSkin_Prefix_pch
+
+#import <UIKit/UIKit.h>
+#import "BFBase.h"
+#import "UIView+Skin.h"
+
+#endif /* BFSkin_Prefix_pch */

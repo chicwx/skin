@@ -10,7 +10,7 @@
 #import "PureLayout.h"
 #import "UIView+Skin.h"
 #import "BFSkinManager.h"
-
+#import <objc/runtime.h>
 
 @interface ViewController ()
 
@@ -20,7 +20,6 @@
 
 @end
 
-
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -28,7 +27,7 @@
 
     [self prepareView];
     
-    [self performanceTest];
+//    [self performanceTest];
     
 }
 

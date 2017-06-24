@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "ZipArchive.h"
 #import "BFSkinManager.h"
+#import "BFHomeViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +24,21 @@
 
     [self configDefaultZIP];
     
+    BFHomeViewController *homeViewController = [BFHomeViewController new];
+    homeViewController.title = @"首页";
+    homeViewController.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:0];
+    
+    ViewController *viewController = [ViewController new];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[homeViewController,viewController];
+    
+    UINavigationController *navigationControlelr = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    navigationControlelr.view.backgroundColor = [UIColor whiteColor];
+    
+    self.window.rootViewController = navigationControlelr;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -29,11 +46,13 @@
     //TODO:默认从bundle解压Default，其余从网络下载
     NSString *defaultPath = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"zip"];
     NSString *darkPath = [[NSBundle mainBundle] pathForResource:@"Dark" ofType:@"zip"];
-
+    
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"Skin"];
     
     NSString *plistPath = [[BFSkinManager sharedInstance] returnPlistPath:@"Default"];
     
+    NSLog(@"fullPath = %@",fullPath);
+
     //若有则不需再解压
     if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         return;
@@ -41,6 +60,7 @@
     
     [SSZipArchive unzipFileAtPath:defaultPath toDestination:fullPath];
     [SSZipArchive unzipFileAtPath:darkPath toDestination:fullPath];
+    
     
 }
 
