@@ -11,6 +11,7 @@
 #import "BFSkinManager.h"
 #import "BFHomeViewController.h"
 #import "ViewController.h"
+#import "AFNetworking.h"
 
 @interface AppDelegate ()
 
@@ -43,12 +44,9 @@
 }
 
 - (void)configDefaultZIP {
-    //TODO:默认从bundle解压Default，其余从网络下载
-    NSString *defaultPath = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"zip"];
-    NSString *darkPath = [[NSBundle mainBundle] pathForResource:@"Dark" ofType:@"zip"];
-    
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"Skin"];
-    
+    //TODO:默认从bundle解压Skin
+    NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"zip"];
+    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *plistPath = [[BFSkinManager sharedInstance] returnPlistPath:@"Default"];
     
     NSLog(@"fullPath = %@",fullPath);
@@ -58,12 +56,32 @@
         return;
     }
     
-    [SSZipArchive unzipFileAtPath:defaultPath toDestination:fullPath];
-    [SSZipArchive unzipFileAtPath:darkPath toDestination:fullPath];
-    
+    [SSZipArchive unzipFileAtPath:skinPath toDestination:fullPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+        
+    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+        [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Default"];
+    }];
     
 }
 
+//从网络下载ZIP资源文件，TODO:
+- (void)downloadZIP {
+    
+    NSString *tempPath = [NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
+    NSString *documentPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/SkinDemo/Skin.zip"]];
+    NSURLSessionDownloadTask *task = [sessionManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        NSLog(@"progress = %@",downloadProgress);
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        return [NSURL fileURLWithPath:documentPath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        [SSZipArchive unzipFileAtPath:tempPath toDestination:documentPath];
+    }];
+    [task resume];
+
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
