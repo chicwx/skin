@@ -32,7 +32,7 @@
     viewController.title = @"配置";
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[homeViewController];
+    tabBarController.viewControllers = @[homeViewController,viewController];
     
     UINavigationController *navigationControlelr = [[UINavigationController alloc] initWithRootViewController:tabBarController];
     navigationControlelr.view.backgroundColor = [UIColor whiteColor];
@@ -56,11 +56,11 @@
         return;
     }
     
-//    [SSZipArchive unzipFileAtPath:skinPath toDestination:fullPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-//        
-//    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
-//        [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Default"];
-//    }];
+    [SSZipArchive unzipFileAtPath:skinPath toDestination:fullPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+        
+    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+        [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Default"];
+    }];
     
 }
 

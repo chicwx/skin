@@ -11,6 +11,7 @@
 #import "UIView+Skin.h"
 #import "BFSkinManager.h"
 #import <objc/runtime.h>
+#import "BFHomeViewController.h"
 
 @interface ViewController ()
 

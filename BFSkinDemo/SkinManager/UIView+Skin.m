@@ -11,6 +11,7 @@
 #import "BFSkinManager.h"
 #import "NSObject+DeallocBlock.h"
 #import "YYModel.h"
+#import "UIImageView+WebCache.h"
 
 static void *kUIView_DeallocHelper;
 static void *kUIView_BFSkinStyle;
@@ -93,7 +94,12 @@ static void *kUIView_BFSkinStyle;
     if ([self isKindOfClass:[UIImageView class]]) {
         UIImageView *imageView = (UIImageView *)self;
         if (skin.backgroundImage) {
-            imageView.image = [BFSkin imageFromName:skin.backgroundImage];
+//            imageView.image = [BFSkin imageFromName:skin.backgroundImage];
+            
+            NSString *resourcePath = [[BFSkinManager sharedInstance] returnResourcePath:[BFSkinManager sharedInstance].styleId];
+            NSString *imagePath = [NSString stringWithFormat:@"%@/%@",resourcePath,skin.backgroundImage];
+            [imageView sd_setImageWithURL:[NSURL fileURLWithPath:imagePath]];
+            
         }
     }
     

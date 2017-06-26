@@ -440,6 +440,7 @@
 				TargetAttributes = {
 					30E5E6D51EF76C6B007A2D36 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = BZJPH34S4P;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -723,6 +724,7 @@
 				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BFSkinDemo/BFSkin-Prefix.pch";
 				INFOPLIST_FILE = BFSkinDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -757,7 +759,7 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = credit.BFSkinDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tuniu.bfskin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -768,9 +770,11 @@
 			baseConfigurationReference = E0D8B16F561DE0088B75249F /* Pods-BFSkinDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = BZJPH34S4P;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BFSkinDemo/BFSkin-Prefix.pch";
 				INFOPLIST_FILE = BFSkinDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -805,9 +809,10 @@
 					"-framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = credit.BFSkinDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tuniu.bfskin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "e95db514-6f45-4d44-b394-11e1b8cbdf4a";
+				PROVISIONING_PROFILE_SPECIFIER = tuniuInhouseIphone;
 			};
 			name = Release;
 		};
