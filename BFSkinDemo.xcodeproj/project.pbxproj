@@ -13,7 +13,6 @@
 		301DF3831EF9112700CC2797 /* BFSkin.m in Sources */ = {isa = PBXBuildFile; fileRef = 301DF3821EF9112700CC2797 /* BFSkin.m */; };
 		302AF5541EF8CA580038A5E6 /* BFSkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 302AF5531EF8CA580038A5E6 /* BFSkinManager.m */; };
 		306505B01EF9246000604F39 /* UIView+Skin.m in Sources */ = {isa = PBXBuildFile; fileRef = 306505AF1EF9246000604F39 /* UIView+Skin.m */; };
-		30DC49791EFE6331009CC53A /* Skin.zip in Resources */ = {isa = PBXBuildFile; fileRef = 30DC49781EFE6331009CC53A /* Skin.zip */; };
 		30E3C2161EFBB306007567F0 /* BFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E3C1C91EFBB306007567F0 /* BFHomeViewController.m */; };
 		30E3C2181EFBB306007567F0 /* BFCarouselModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E3C1CE1EFBB306007567F0 /* BFCarouselModel.m */; };
 		30E3C2191EFBB306007567F0 /* BFHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E3C1D01EFBB306007567F0 /* BFHomeModel.m */; };
@@ -75,6 +74,7 @@
 		30E5E6E41EF76C6B007A2D36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30E5E6E21EF76C6B007A2D36 /* Main.storyboard */; };
 		30E5E6E61EF76C6B007A2D36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30E5E6E51EF76C6B007A2D36 /* Assets.xcassets */; };
 		30E5E6E91EF76C6B007A2D36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30E5E6E71EF76C6B007A2D36 /* LaunchScreen.storyboard */; };
+		30E5FEC21F011DDA00E1DB23 /* Skin.skin in Resources */ = {isa = PBXBuildFile; fileRef = 30E5FEC11F011DDA00E1DB23 /* Skin.skin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,7 +90,6 @@
 		302AF5531EF8CA580038A5E6 /* BFSkinManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFSkinManager.m; sourceTree = "<group>"; };
 		306505AE1EF9246000604F39 /* UIView+Skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Skin.h"; sourceTree = "<group>"; };
 		306505AF1EF9246000604F39 /* UIView+Skin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Skin.m"; sourceTree = "<group>"; };
-		30DC49781EFE6331009CC53A /* Skin.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Skin.zip; sourceTree = "<group>"; };
 		30E3C1C81EFBB306007567F0 /* BFHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFHomeViewController.h; sourceTree = "<group>"; };
 		30E3C1C91EFBB306007567F0 /* BFHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFHomeViewController.m; sourceTree = "<group>"; };
 		30E3C1CD1EFBB306007567F0 /* BFCarouselModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFCarouselModel.h; sourceTree = "<group>"; };
@@ -170,6 +169,7 @@
 		30E5E6E51EF76C6B007A2D36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30E5E6E81EF76C6B007A2D36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30E5E6EA1EF76C6B007A2D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30E5FEC11F011DDA00E1DB23 /* Skin.skin */ = {isa = PBXFileReference; lastKnownFileType = file; path = Skin.skin; sourceTree = "<group>"; };
 		E04C8749B002DC1F0DE24EFD /* libPods-BFSkinDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BFSkinDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D8B16F561DE0088B75249F /* Pods-BFSkinDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFSkinDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BFSkinDemo/Pods-BFSkinDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,7 +206,7 @@
 		30DC49731EFE631F009CC53A /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				30DC49781EFE6331009CC53A /* Skin.zip */,
+				30E5FEC11F011DDA00E1DB23 /* Skin.skin */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -483,10 +483,10 @@
 				30E3C2291EFBB306007567F0 /* icon_bell21@2x.png in Resources */,
 				30E3C21C1EFBB306007567F0 /* icon_bell0@2x.png in Resources */,
 				30E3C2221EFBB306007567F0 /* icon_bell15@2x.png in Resources */,
+				30E5FEC21F011DDA00E1DB23 /* Skin.skin in Resources */,
 				30E3C2431EFBB306007567F0 /* icon_bell8@2x.png in Resources */,
 				30E3C2241EFBB306007567F0 /* icon_bell17@2x.png in Resources */,
 				30E3C22A1EFBB306007567F0 /* icon_bell22@2x.png in Resources */,
-				30DC49791EFE6331009CC53A /* Skin.zip in Resources */,
 				30E3C2231EFBB306007567F0 /* icon_bell16@2x.png in Resources */,
 				30E3C22D1EFBB306007567F0 /* icon_bell25@2x.png in Resources */,
 				30E5E6E91EF76C6B007A2D36 /* LaunchScreen.storyboard in Resources */,

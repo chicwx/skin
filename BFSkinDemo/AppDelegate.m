@@ -45,7 +45,7 @@
 
 - (void)configDefaultZIP {
     //TODO:默认从bundle解压Skin
-    NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"zip"];
+    NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"skin"];
     NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *plistPath = [[BFSkinManager sharedInstance] returnPlistPath:@"Default"];
     
