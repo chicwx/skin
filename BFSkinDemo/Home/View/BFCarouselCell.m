@@ -33,7 +33,7 @@
 - (BFCarouselView *)boardCarouselView {
     if (!_boardCarouselView) {
         _boardCarouselView = [[BFCarouselView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, ADAPT_H(80)) images:nil];
-        _boardCarouselView.CarouselAutoScroll = YES;
+        _boardCarouselView.carouselAutoScroll = YES;
         [self.contentView addSubview:_boardCarouselView];
     }
     return _boardCarouselView;

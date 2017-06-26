@@ -7,6 +7,7 @@
 //
 
 #import "BFHeaderCell.h"
+#import "BFSkinManager.h"
 
 @implementation BFHeaderCell
 
@@ -23,16 +24,16 @@
     [[BFAnalysisManager sharedManager] logEvent:@"Availablelimit" eventLabel:@"可用额度"];
     
     if (button.selected == NO) {
-        self.TitleText = self.availableTitleLabel.text;
-        self.CreditText = self.availableCreditLabel.text;
-        self.TotalCreditText = self.TotalCreditLabel.text;
+        self.titleText = self.availableTitleLabel.text;
+        self.creditText = self.availableCreditLabel.text;
+        self.totalCreditText = self.totalCreditLabel.text;
         self.availableTitleLabel.text = @"可用消费信用额度(元)";
         self.availableCreditLabel.text = @"恭喜发财";
-        self.TotalCreditLabel.text = @"总消费额度******      本月账单******";
+        self.totalCreditLabel.text = @"总消费额度******      本月账单******";
     } else {
-        self.availableTitleLabel.text = self.TitleText;
-        self.availableCreditLabel.text = self.CreditText;
-        self.TotalCreditLabel.text = self.TotalCreditText;
+        self.availableTitleLabel.text = self.titleText;
+        self.availableCreditLabel.text = self.creditText;
+        self.totalCreditLabel.text = self.totalCreditText;
     }
     button.selected = !button.selected;
 }
@@ -64,6 +65,12 @@
 
 - (void)TapClick{
     //去登录
+    if ([[[BFSkinManager sharedInstance] readCacheConfig] isEqualToString:@"Default"]) {
+        [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Dark"];
+    } else {
+        [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Default"];
+    }
+
 }
 
 #pragma  mark Layout
@@ -74,15 +81,15 @@
         [self.headBackImageView bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeTop ofView:self];
         [self.headBackImageView bf_setDimensionsToSize:CGSizeMake(SCREEN_WIDTH, ADAPT_H(240))];
     }
-    [self.headBackImageView addSubview:self.TitleLabel];
+    [self.headBackImageView addSubview:self.titleLabel];
     {
-        [self.TitleLabel bf_alignAxisToSuperviewAxis:BFAAxisVertical];
-        [self.TitleLabel bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeTop ofView:self withOffset:32];
+        [self.titleLabel bf_alignAxisToSuperviewAxis:BFAAxisVertical];
+        [self.titleLabel bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeTop ofView:self withOffset:32];
     }
     [self.headBackImageView addSubview:self.messageImageView];
     {
         [self.messageImageView bf_pinEdge:BFAEdgeRight toEdge:BFAEdgeRight ofView:self withOffset:-5];
-        [self.messageImageView bf_alignAxis:BFAAxisHorizontal toSameAxisOfView:self.TitleLabel withOffset:-2];
+        [self.messageImageView bf_alignAxis:BFAAxisHorizontal toSameAxisOfView:self.titleLabel withOffset:-2];
         [self.messageImageView bf_setDimensionsToSize:CGSizeMake(28, 28)];
     }
     [self.headBackImageView addSubview:self.availableTitleLabel];
@@ -90,27 +97,27 @@
         [self.availableTitleLabel bf_alignAxisToSuperviewAxis:BFAAxisVertical];
         [self.availableTitleLabel bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeTop ofView:self withOffset:ADAPT_H(90)];
     }
-    [self.headBackImageView addSubview:self.HideBtn];
+    [self.headBackImageView addSubview:self.hideBtn];
     {
-        [self.HideBtn bf_pinEdge:BFAEdgeLeft toEdge:BFAEdgeRight ofView:self.availableTitleLabel];
-        [self.HideBtn bf_setDimensionsToSize:CGSizeMake(40,40)];
-        [self.HideBtn bf_alignAxis:BFAAxisHorizontal toSameAxisOfView:self.availableTitleLabel];
+        [self.hideBtn bf_pinEdge:BFAEdgeLeft toEdge:BFAEdgeRight ofView:self.availableTitleLabel];
+        [self.hideBtn bf_setDimensionsToSize:CGSizeMake(40,40)];
+        [self.hideBtn bf_alignAxis:BFAAxisHorizontal toSameAxisOfView:self.availableTitleLabel];
     }
-    [self.headBackImageView addSubview:self.MiddleBtn];
+    [self.headBackImageView addSubview:self.middleBtn];
     {
-        [self.MiddleBtn bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeBottom ofView:self.availableTitleLabel withOffset:ADAPT_H(18)];
-        [self.MiddleBtn bf_alignAxisToSuperviewAxis:BFAAxisVertical];
-        [self.MiddleBtn bf_setDimensionsToSize:CGSizeMake(114, ADAPT_H(30))];
+        [self.middleBtn bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeBottom ofView:self.availableTitleLabel withOffset:ADAPT_H(18)];
+        [self.middleBtn bf_alignAxisToSuperviewAxis:BFAAxisVertical];
+        [self.middleBtn bf_setDimensionsToSize:CGSizeMake(114, ADAPT_H(30))];
     }
     [self.headBackImageView addSubview:self.availableCreditLabel];
     {
         [self.availableCreditLabel bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeBottom ofView:self.availableTitleLabel withOffset:ADAPT_H(16)];
         [self.availableCreditLabel bf_alignAxisToSuperviewAxis:BFAAxisVertical];
     }
-    [self.headBackImageView addSubview:self.TotalCreditLabel];
+    [self.headBackImageView addSubview:self.totalCreditLabel];
     {
-        [self.TotalCreditLabel bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeBottom ofView:self.availableTitleLabel withOffset:ADAPT_H(72)];
-        [self.TotalCreditLabel bf_alignAxisToSuperviewAxis:BFAAxisVertical];
+        [self.totalCreditLabel bf_pinEdge:BFAEdgeTop toEdge:BFAEdgeBottom ofView:self.availableTitleLabel withOffset:ADAPT_H(72)];
+        [self.totalCreditLabel bf_alignAxisToSuperviewAxis:BFAAxisVertical];
     }
     [self.headBackImageView addSubview:self.bottomBtn];
     {
@@ -130,15 +137,16 @@
     return _headBackImageView;
 }
 
-- (BFLabel *)TitleLabel {
-    if(!_TitleLabel){
-        _TitleLabel = [[BFLabel alloc]init];
-        _TitleLabel.text = @"小黑鱼";
-        _TitleLabel.textColor = UIColorWhite;
-        _TitleLabel.font = FONT(17);
-        [_TitleLabel sizeToFit];
+- (BFLabel *)titleLabel {
+    if(!_titleLabel){
+        _titleLabel = [[BFLabel alloc]init];
+        _titleLabel.text = @"小黑鱼";
+        _titleLabel.textColor = UIColorWhite;
+        _titleLabel.font = FONT(17);
+        _titleLabel.bf_skinStyle = @"skin_navigation_title";
+        [_titleLabel sizeToFit];
     }
-    return _TitleLabel;
+    return _titleLabel;
 }
 
 - (UIImageView *)messageImageView {
@@ -151,28 +159,28 @@
     return _messageImageView;
 }
 
-- (BFButton *)HideBtn {
-    if(!_HideBtn){
-        _HideBtn = [[BFButton alloc]init];
-        [_HideBtn setImage:[UIImage imageNamed:@"icon_eye_o"] forState:UIControlStateNormal];
-        [_HideBtn setImage:[UIImage imageNamed:@"icon_eye_c"] forState:UIControlStateSelected];
-        [_HideBtn addTarget:self action:@selector(hidenBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+- (BFButton *)hideBtn {
+    if(!_hideBtn){
+        _hideBtn = [[BFButton alloc]init];
+        [_hideBtn setImage:[UIImage imageNamed:@"icon_eye_o"] forState:UIControlStateNormal];
+        [_hideBtn setImage:[UIImage imageNamed:@"icon_eye_c"] forState:UIControlStateSelected];
+        [_hideBtn addTarget:self action:@selector(hidenBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _HideBtn;
+    return _hideBtn;
 }
 
-- (BFButton *)MiddleBtn {
-    if(!_MiddleBtn){
-        _MiddleBtn = [[BFButton alloc]init];
-        [_MiddleBtn setTitleColor:UIColorWhite forState:UIControlStateNormal];
-        [_MiddleBtn setTitle:@"立即开卡" forState:UIControlStateNormal];
-        _MiddleBtn.layer.cornerRadius = ADAPT_H(15);
-        _MiddleBtn.layer.borderColor = UIColorWhite.CGColor;
-        _MiddleBtn.layer.borderWidth = 1;
-        [_MiddleBtn setBackgroundColor:CLEARCOLOR];
-        [_MiddleBtn addTarget:self action:@selector(MiddleBtnClick) forControlEvents:UIControlEventTouchUpInside];
+- (BFButton *)middleBtn {
+    if(!_middleBtn){
+        _middleBtn = [[BFButton alloc]init];
+        [_middleBtn setTitleColor:UIColorWhite forState:UIControlStateNormal];
+        [_middleBtn setTitle:@"立即开卡" forState:UIControlStateNormal];
+        _middleBtn.layer.cornerRadius = ADAPT_H(15);
+        _middleBtn.layer.borderColor = UIColorWhite.CGColor;
+        _middleBtn.layer.borderWidth = 1;
+        [_middleBtn setBackgroundColor:CLEARCOLOR];
+        [_middleBtn addTarget:self action:@selector(MiddleBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _MiddleBtn;
+    return _middleBtn;
 }
 
 - (BFLabel *)availableTitleLabel {
@@ -181,6 +189,7 @@
         _availableTitleLabel.font = FONT(ADAPT_H(12));
         _availableTitleLabel.textColor = RGBACOLOR(255, 255, 255, 0.6);
         [_availableTitleLabel sizeToFit];
+        _availableTitleLabel.bf_skinStyle = @"skin_available_title";
     }
     return _availableTitleLabel;
 }
@@ -190,18 +199,19 @@
         _availableCreditLabel = [[BFLabel alloc]init];
         _availableCreditLabel.textColor = UIColorWhite;
         [_availableCreditLabel sizeToFit];
+        _availableCreditLabel.bf_skinStyle = @"skin_available_credit_title";
     }
     return _availableCreditLabel;
 }
 
-- (BFLabel *)TotalCreditLabel {
-    if(!_TotalCreditLabel){
-        _TotalCreditLabel = [[BFLabel alloc]init];
-        _TotalCreditLabel.font = FONT(ADAPT_H(14));
-        _TotalCreditLabel.textColor = RGBACOLOR(255, 255, 255, 0.6);
-        [_TotalCreditLabel sizeToFit];
+- (BFLabel *)totalCreditLabel {
+    if(!_totalCreditLabel){
+        _totalCreditLabel = [[BFLabel alloc]init];
+        _totalCreditLabel.font = FONT(ADAPT_H(14));
+        _totalCreditLabel.textColor = RGBACOLOR(255, 255, 255, 0.6);
+        [_totalCreditLabel sizeToFit];
     }
-    return _TotalCreditLabel;
+    return _totalCreditLabel;
 }
 
 - (BFButton *)bottomBtn {
@@ -214,6 +224,7 @@
         _bottomBtn.layer.borderWidth = 1;
         [_bottomBtn setBackgroundColor:CLEARCOLOR];
         [_bottomBtn addTarget:self action:@selector(TapClick) forControlEvents:UIControlEventTouchUpInside];
+        _bottomBtn.bf_skinStyle = @"skin_login_button";
     }
     return _bottomBtn;
 }

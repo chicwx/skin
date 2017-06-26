@@ -40,7 +40,7 @@
 - (void)prepareView {
     [self.view addSubview:self.darkButton];
     [self.view addSubview:self.defaultButton];
-    [self.view addSubview:self.bottomImageView];
+//    [self.view addSubview:self.bottomImageView];
     
     [self.darkButton autoSetDimensionsToSize:CGSizeMake(100, 50)];
     [self.darkButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
@@ -51,9 +51,9 @@
     [self.defaultButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
     [self.defaultButton autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.darkButton withOffset:40.f];
     
-    [self.bottomImageView autoSetDimensionsToSize:CGSizeMake(200, 50)];
-    [self.bottomImageView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-    [self.bottomImageView autoAlignAxisToSuperviewAxis:ALAxisVertical];
+//    [self.bottomImageView autoSetDimensionsToSize:CGSizeMake(200, 50)];
+//    [self.bottomImageView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+//    [self.bottomImageView autoAlignAxisToSuperviewAxis:ALAxisVertical];
 }
 
 - (void)performanceTest {

@@ -20,5 +20,6 @@
 - (void)changeToSkinWithStyleId:(NSString *)styleId;
 - (NSString *)returnPlistPath:(NSString *)styleId;
 - (NSString *)returnResourcePath:(NSString *)styleId;
+- (NSString *)readCacheConfig;
 
 @end

@@ -107,9 +107,9 @@ static NSString *kDefaultIdentifer = @"kDefaultIdentifer";
         BFHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:kHomeHeaderCell];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = (id<HomeHeaderDelegate>)self;
-        cell.HideBtn.hidden = YES;
-        cell.MiddleBtn.hidden = YES;
-        cell.TotalCreditLabel.hidden = YES;
+        cell.hideBtn.hidden = YES;
+        cell.middleBtn.hidden = YES;
+        cell.totalCreditLabel.hidden = YES;
         cell.bottomBtn.hidden = NO;
         cell.availableCreditLabel.hidden = NO;
         cell.availableTitleLabel.text = @"可用消费额度(元)";
@@ -131,7 +131,10 @@ static NSString *kDefaultIdentifer = @"kDefaultIdentifer";
     } else if (indexPath.section == 3) {
         BFCarouselCell *cell = [tableView dequeueReusableCellWithIdentifier:kBFCarouselCell];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell initCellWithDtoArray:self.carouselList];
+        BFCarouselModel *model = [BFCarouselModel modelWithDictionary:@{@"bannerIcon":@"https://m.tuniucdn.com/fb2/t1/G1/M00/2A/32/Cii9EFko376IBSn3AAC-mu0zrQcAAK4EwPIJSUAAL6y25.jpeg",
+                                               @"bannerUrl":@"http://bbf.sit.tuniu.org/active/msite_1/intro.html"}];
+        
+        [cell initCellWithDtoArray:@[model]];
         return cell;
         
     } else if (indexPath.section == 4) {

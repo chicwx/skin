@@ -22,9 +22,9 @@
     /**支持最大轮播个数(默认8个)*/
     NSInteger carouselMaxItemCount;
     
-    UIScrollView *CarouselScrollView;
+    UIScrollView *carouselScrollView;
     
-    BFPageControl *CarouselPageControl;
+    BFPageControl *carouselPageControl;
 }
 
 @end
@@ -48,22 +48,22 @@
         [self adjustImagesArrayAccordingMaxAccount:images];
         
         //scrollView
-        CarouselScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        CarouselScrollView.backgroundColor = [UIColor whiteColor];
-        CarouselScrollView.showsHorizontalScrollIndicator = NO;
-        CarouselScrollView.showsVerticalScrollIndicator = NO;
-        CarouselScrollView.pagingEnabled = YES;
-        CarouselScrollView.scrollEnabled = NO;
-        CarouselScrollView.scrollsToTop = NO;
-        CarouselScrollView.delegate = self;
-        CarouselScrollView.contentSize = CGSizeMake(CarouselScrollView.frame.size.width * 3, CarouselScrollView.frame.size.height);
-        [self addSubview:CarouselScrollView];
+        carouselScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        carouselScrollView.backgroundColor = [UIColor whiteColor];
+        carouselScrollView.showsHorizontalScrollIndicator = NO;
+        carouselScrollView.showsVerticalScrollIndicator = NO;
+        carouselScrollView.pagingEnabled = YES;
+        carouselScrollView.scrollEnabled = NO;
+        carouselScrollView.scrollsToTop = NO;
+        carouselScrollView.delegate = self;
+        carouselScrollView.contentSize = CGSizeMake(carouselScrollView.frame.size.width * 3, carouselScrollView.frame.size.height);
+        [self addSubview:carouselScrollView];
         
         //pageControl
-        CarouselPageControl = [[BFPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height - ADAPT_H(9), self.frame.size.width, 2)];
-        CarouselPageControl.numberOfPages = [imageArray count];
-        CarouselPageControl.currentPage = selectedIndex;
-        [self addSubview:CarouselPageControl];
+        carouselPageControl = [[BFPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height - ADAPT_H(9), self.frame.size.width, 2)];
+        carouselPageControl.numberOfPages = [imageArray count];
+        carouselPageControl.currentPage = selectedIndex;
+        [self addSubview:carouselPageControl];
         
         for (NSInteger i = 0; i < 3; i++) {
             UIImageView *imageView = [[UIImageView alloc] init];
@@ -76,7 +76,7 @@
             [imageView addGestureRecognizer:singleTap];
             //frame
             imageView.frame = CGRectMake(self.frame.size.width * i, 0, self.frame.size.width, self.frame.size.height);
-            [CarouselScrollView addSubview:imageView];
+            [carouselScrollView addSubview:imageView];
         }
     }
     return self;
@@ -105,14 +105,14 @@
         
         //分页符是否显示
         if ([imageArray count] > 1) {
-            CarouselPageControl.hidden = NO;
-            CarouselScrollView.scrollEnabled = YES;
+            carouselPageControl.hidden = NO;
+            carouselScrollView.scrollEnabled = YES;
         } else {
-            CarouselPageControl.hidden = YES;
-            CarouselScrollView.scrollEnabled = NO;
+            carouselPageControl.hidden = YES;
+            carouselScrollView.scrollEnabled = NO;
         }
     } else {
-        CarouselScrollView.scrollEnabled = NO;
+        carouselScrollView.scrollEnabled = NO;
     }
 }
 
@@ -125,8 +125,8 @@
     selectedIndex = 0;
     //根据最大显示个数裁剪数组
     [self adjustImagesArrayAccordingMaxAccount:images];
-    CarouselPageControl.numberOfPages = imageArray.count;
-    CarouselPageControl.currentPage = selectedIndex;
+    carouselPageControl.numberOfPages = imageArray.count;
+    carouselPageControl.currentPage = selectedIndex;
     [self startScrolling];
 }
 
@@ -136,7 +136,7 @@
     if (imageArray && [imageArray count] != 0) {
         NSArray *displayArray = [self getDisplayArrayWithCurrentPageIndex:selectedIndex];
         for (NSInteger i = 0; i < 3; i ++) {
-            UIImageView *imageView = (UIImageView *)[CarouselScrollView viewWithTag:BoardCarouselBeginTag + i];
+            UIImageView *imageView = (UIImageView *)[carouselScrollView viewWithTag:BoardCarouselBeginTag + i];
             
             BFCarouselModel *model = displayArray[i];
             NSString *url = model.bannerIcon;
@@ -145,7 +145,7 @@
                 [imageView bf_setImageWithURL:[NSURL URLWithString:url] placeholderImage:nil];
             }
         }
-        CarouselScrollView.contentOffset = CGPointMake(self.frame.size.width, 0);
+        carouselScrollView.contentOffset = CGPointMake(self.frame.size.width, 0);
     }
 }
 
@@ -205,10 +205,10 @@
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
     [animation setType:kCATransitionPush];
     [animation setSubtype:kCATransitionFromRight];
-    [CarouselScrollView.layer addAnimation:animation forKey:nil];
+    [carouselScrollView.layer addAnimation:animation forKey:nil];
     
     [self refreshScrollView];
-    [CarouselPageControl setCurrentPage:selectedIndex];
+    [carouselPageControl setCurrentPage:selectedIndex];
 }
 
 #pragma mark - UIResponder Event
@@ -229,7 +229,7 @@
     
     NSInteger xOffset = scrollView.contentOffset.x;
     if ((xOffset % (NSInteger)self.frame.size.width == 0)) {
-        [CarouselPageControl setCurrentPage:selectedIndex];
+        [carouselPageControl setCurrentPage:selectedIndex];
     }
     //往下翻一张
     if(xOffset >= (2*self.frame.size.width)) {
@@ -254,7 +254,7 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView {
-    [CarouselScrollView setContentOffset:CGPointMake(self.frame.size.width, 0) animated:YES];
+    [carouselScrollView setContentOffset:CGPointMake(self.frame.size.width, 0) animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
