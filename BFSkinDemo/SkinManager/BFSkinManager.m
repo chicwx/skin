@@ -7,6 +7,8 @@
 //
 
 #import "BFSkinManager.h"
+#import "AFNetworking.h"
+#import "ZipArchive.h"
 
 NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
 
@@ -45,12 +47,32 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
     }
 }
 
+#pragma mark - Public
+- (void)configDefaultSkin {
+    //TODO:默认从bundle解压Skin
+    NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"skin"];
+    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *plistPath = [[BFSkinManager sharedInstance] returnPlistPath:@"Default"];
+    
+    NSLog(@"fullPath = %@",fullPath);
+    
+    //若有则不需再解压
+    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        return;
+    }
+    
+    [SSZipArchive unzipFileAtPath:skinPath toDestination:fullPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+        
+    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+        [self changeToSkinWithStyleId:@"Default"];
+    }];
+}
+
 - (void)changeToSkinWithStyleId:(NSString *)styleId {
     [self loadSkinWithStyleId:styleId];
     [[NSNotificationCenter defaultCenter] postNotificationName:kSkinDidChangeNotification object:nil];
 }
 
-#pragma mark - Public
 - (NSString *)returnPlistPath:(NSString *)styleId {
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"Skin/%@/style.plist",styleId]];
     return fullPath;
@@ -59,6 +81,25 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
 - (NSString *)returnResourcePath:(NSString *)styleId {
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"Skin/%@/Resource/",styleId]];
     return fullPath;
+}
+
+//从网络下载ZIP资源文件，TODO:
+- (void)downloadSkinResource {
+    
+    NSString *tempPath = [NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
+    NSString *documentPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/SkinDemo/Skin.skin"]];
+    NSURLSessionDownloadTask *task = [sessionManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        NSLog(@"progress = %@",downloadProgress);
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        return [NSURL fileURLWithPath:documentPath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        [SSZipArchive unzipFileAtPath:tempPath toDestination:documentPath];
+    }];
+    [task resume];
+    
 }
 
 #pragma mark - NSUserDefaults

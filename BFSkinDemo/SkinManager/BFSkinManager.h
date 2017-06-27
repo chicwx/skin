@@ -21,5 +21,7 @@
 - (NSString *)returnPlistPath:(NSString *)styleId;
 - (NSString *)returnResourcePath:(NSString *)styleId;
 - (NSString *)readCacheConfig;
+- (void)configDefaultSkin;
+- (void)downloadSkinResource;
 
 @end

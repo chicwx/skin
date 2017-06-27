@@ -11,7 +11,6 @@
 #import "BFSkinManager.h"
 #import "BFHomeViewController.h"
 #import "ViewController.h"
-#import "AFNetworking.h"
 
 @interface AppDelegate ()
 
@@ -22,8 +21,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
-    [self configDefaultZIP];
     
     BFHomeViewController *homeViewController = [BFHomeViewController new];
     homeViewController.title = @"首页";
@@ -40,47 +37,9 @@
     self.window.rootViewController = navigationControlelr;
     [self.window makeKeyAndVisible];
     
+    [[BFSkinManager sharedInstance] configDefaultSkin];
+
     return YES;
-}
-
-- (void)configDefaultZIP {
-    //TODO:默认从bundle解压Skin
-    NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"skin"];
-    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *plistPath = [[BFSkinManager sharedInstance] returnPlistPath:@"Default"];
-    
-    NSLog(@"fullPath = %@",fullPath);
-
-    //若有则不需再解压
-    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        return;
-    }
-    
-    [SSZipArchive unzipFileAtPath:skinPath toDestination:fullPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-        
-    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
-        [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Default"];
-    }];
-    
-}
-
-//从网络下载ZIP资源文件，TODO:
-- (void)downloadZIP {
-    
-    NSString *tempPath = [NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
-    NSString *documentPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/SkinDemo/Skin.zip"]];
-    NSURLSessionDownloadTask *task = [sessionManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        NSLog(@"progress = %@",downloadProgress);
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        return [NSURL fileURLWithPath:documentPath];
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        [SSZipArchive unzipFileAtPath:tempPath toDestination:documentPath];
-    }];
-    [task resume];
-
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
