@@ -5,7 +5,7 @@
 针对需要配置换肤的UI控件，使用UIView的Category和关联对象为每一个UIView对象添加1个style属性。添加style属性的同时，注册1个通知，在style改变时触发更新UI的方法，根据sytle.plist文件中的配置设置新的UI。
 
 ####可配置属性与皮肤包结构
-1. 可进行配置的控件属性（可扩展）
+- 可进行配置的控件属性（可扩展）
 
 	- 字体大小
 	
@@ -23,7 +23,8 @@
 			backgroundImage
 	
 
-2. 皮肤包是以.skin为后缀的zip包，存放样式文件和资源文件，具体结构如下：
+
+- 皮肤包是以.skin为后缀的zip包，存放样式文件和资源文件，具体结构如下：
 
 		xxx.skin
 		  |--style.plist
@@ -32,7 +33,7 @@
 			   |--xxx.jpeg
 			   |--xxx.png
 
-3. plist文件示例
+- plist文件示例
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -113,8 +114,8 @@
 例如：
 
 ```
-	UILabel *label = [UILabel new];
-    label.bf_skinStyle = @"skin_demo_title";
+UILabel *label = [UILabel new];
+label.bf_skinStyle = @"skin_demo_title";
 ```
 
 设置完`bf_skinStyle`之后，会从plist文件中读取`skin_demo_title`对应的样式。
