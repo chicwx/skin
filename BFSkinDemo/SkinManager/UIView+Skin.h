@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BFSkinManager.h"
 #import <UIKit/UIKit.h>
 
 @interface UIView (Skin)
 
 @property (nonatomic, strong) NSString *bf_skinStyle;
+@property (nonatomic, strong) BFSkinCache *bf_skinCache;
 
 @end

@@ -45,3 +45,20 @@
 @property (nonatomic, strong) BFSkinBackgroundImage *backgroundImage;
 
 @end
+
+#pragma mark - BFSkinCache
+@interface BFSkinCache : NSObject
+
+@property (nonatomic, assign) CGFloat radius;
+@property (nonatomic, strong) UIFont *font;
+@property (nonatomic, strong) UIColor *textColorNormal;
+@property (nonatomic, strong) UIColor *textColorPress;
+@property (nonatomic, strong) UIColor *textColorDisable;
+@property (nonatomic, strong) UIColor *backgroundColorNormal;
+//@property (nonatomic, strong) UIColor *backgroundColorPress;
+//@property (nonatomic, strong) UIColor *backgroundColorDisable;
+@property (nonatomic, strong) UIImage *backgroundImageNormal;
+@property (nonatomic, strong) UIImage *backgroundImagePress;
+@property (nonatomic, strong) UIImage *backgroundImageDisable;
+
+@end

@@ -84,3 +84,8 @@
 }
 
 @end
+
+#pragma mark - BFSkinCache
+@implementation BFSkinCache
+
+@end

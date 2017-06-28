@@ -10,6 +10,7 @@
 #import "BFSkin.h"
 
 #define kSkinDidChangeNotification @"kSkinDidChangeNotification"
+#define kSkinResetNotification @"kSkinResetNotification"
 
 @interface BFSkinManager : NSObject
 
@@ -18,6 +19,7 @@
 
 + (BFSkinManager *)sharedInstance;
 - (void)changeToSkinWithStyleId:(NSString *)styleId;
+- (void)resetSkinStyle;
 - (NSString *)returnPlistPath:(NSString *)styleId;
 - (NSString *)returnResourcePath:(NSString *)styleId;
 - (NSString *)readCacheConfig;

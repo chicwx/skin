@@ -48,6 +48,10 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
 }
 
 #pragma mark - Public
+- (void)resetSkinStyle {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSkinResetNotification object:nil];
+}
+
 - (void)configDefaultSkin {
     //TODO:默认从bundle解压Skin
     NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"skin"];

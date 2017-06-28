@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0F821C1C2063899B27D882C353D5B5EF6DFC848B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "78167FB397C49A23D7E859846091D71892D76630" : 9223372036854775807,
+    "0F821C1C2063899B27D882C353D5B5EF6DFC848B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0B22A624-5F75-4894-9601-4D68A0CAD494",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "78167FB397C49A23D7E859846091D71892D76630" : "bfbase\/",
+    "0F821C1C2063899B27D882C353D5B5EF6DFC848B" : "BFSkinDemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BFSkinDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BFSkinDemo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/bbt.tuniu.org\/scm\/~wangxiao3\/bfskindemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0F821C1C2063899B27D882C353D5B5EF6DFC848B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/bbt.tuniu.org\/scm\/blackfishios\/bfbase.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78167FB397C49A23D7E859846091D71892D76630"
+    }
+  ]
+}

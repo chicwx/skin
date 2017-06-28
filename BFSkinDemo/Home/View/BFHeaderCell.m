@@ -63,14 +63,13 @@
     //跳认证中心
 }
 
-- (void)TapClick{
+- (void)tapClick{
     //去登录
     if ([[[BFSkinManager sharedInstance] readCacheConfig] isEqualToString:@"Default"]) {
         [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Dark"];
     } else {
         [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Default"];
     }
-
 }
 
 #pragma  mark Layout
@@ -223,7 +222,7 @@
         _bottomBtn.layer.borderColor = UIColorWhite.CGColor;
         _bottomBtn.layer.borderWidth = 1;
         [_bottomBtn setBackgroundColor:CLEARCOLOR];
-        [_bottomBtn addTarget:self action:@selector(TapClick) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomBtn addTarget:self action:@selector(tapClick) forControlEvents:UIControlEventTouchUpInside];
         _bottomBtn.bf_skinStyle = @"skin_login_button";
     }
     return _bottomBtn;

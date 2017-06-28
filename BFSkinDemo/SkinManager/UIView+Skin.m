@@ -8,13 +8,13 @@
 
 #import "UIView+Skin.h"
 #import <objc/runtime.h>
-#import "BFSkinManager.h"
 #import "NSObject+DeallocBlock.h"
 #import "YYModel.h"
 #import "UIImageView+WebCache.h"
 
 static void *kUIView_DeallocHelper;
 static void *kUIView_BFSkinStyle;
+static void *kUIView_SkinCache;
 
 @implementation UIView (Skin)
 
@@ -35,6 +35,9 @@ static void *kUIView_BFSkinStyle;
             
             [[NSNotificationCenter defaultCenter] removeObserver:self name:kSkinDidChangeNotification object:nil];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skinChanged) name:kSkinDidChangeNotification object:nil];
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:kSkinResetNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStyle) name:kSkinResetNotification object:nil];
+
             [self skinChanged];
         }
     } else {
@@ -45,6 +48,14 @@ static void *kUIView_BFSkinStyle;
 
 - (NSString *)bf_skinStyle {
     return objc_getAssociatedObject(self, &kUIView_BFSkinStyle);
+}
+
+- (void)setBf_skinCache:(BFSkinCache *)bf_skinCache {
+    objc_setAssociatedObject(self, &kUIView_SkinCache, bf_skinCache, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (BFSkinCache *)bf_skinCache {
+    return objc_getAssociatedObject(self, &kUIView_SkinCache);
 }
 
 - (void)skinChanged {
@@ -59,6 +70,39 @@ static void *kUIView_BFSkinStyle;
 }
 
 - (void)changeSkin {
+    //缓存代码中的样式
+    if (!self.bf_skinCache) {
+        BFSkinCache *skinCache = [BFSkinCache new];
+        skinCache.backgroundColorNormal = self.backgroundColor;
+        skinCache.radius = self.layer.cornerRadius;
+        if ([self isKindOfClass:[UILabel class]]) {
+            UILabel *label = (UILabel *)self;
+            skinCache.font = label.font;
+            skinCache.textColorNormal = label.textColor;
+        }
+        if ([self isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)self;
+            skinCache.font = button.titleLabel.font;
+            skinCache.textColorNormal = [button titleColorForState:UIControlStateNormal];
+            skinCache.textColorPress = [button titleColorForState:UIControlStateFocused];
+            skinCache.textColorDisable = [button titleColorForState:UIControlStateDisabled];
+            
+            skinCache.backgroundImageNormal = [button imageForState:UIControlStateNormal];
+            skinCache.backgroundImagePress = [button imageForState:UIControlStateFocused];
+            skinCache.backgroundImageDisable = [button imageForState:UIControlStateDisabled];
+            
+        }
+        if ([self isKindOfClass:[UIImageView class]]) {
+            UIImageView *imageView = (UIImageView *)self;
+            skinCache.backgroundImageNormal = imageView.image;
+        }
+        self.bf_skinCache = skinCache;
+    }
+    
+    //重置为代码样式
+    [self resetStyle];
+    
+    //读取配置文件样式
     NSString *skinStyle = self.bf_skinStyle;
     NSDictionary *styleInfo = [BFSkinManager sharedInstance].skinConfigDictionary[skinStyle];
     BFSkin *skin = [BFSkin yy_modelWithJSON:styleInfo];
@@ -95,6 +139,16 @@ static void *kUIView_BFSkinStyle;
             [button setTitleColor:[BFSkin colorFromHexString:skin.textColor.textColorDisable] forState:UIControlStateDisabled];
         }
         
+        if (skin.backgroundColor.backgroundColorNormal) {
+            [button setImage:[UIImage bf_imageWithColor:[BFSkin colorFromHexString:skin.backgroundColor.backgroundColorNormal]] forState:UIControlStateNormal];
+        }
+        if (skin.backgroundColor.backgroundColorPress) {
+            [button setImage:[UIImage bf_imageWithColor:[BFSkin colorFromHexString:skin.backgroundColor.backgroundColorPress]] forState:UIControlStateFocused];
+        }
+        if (skin.backgroundColor.backgroundColorDisable) {
+            [button setImage:[UIImage bf_imageWithColor:[BFSkin colorFromHexString:skin.backgroundColor.backgroundColorDisable]] forState:UIControlStateDisabled];
+        }
+        
         if (skin.backgroundImage.backgroundImageNormal) {
             [button setImage:[BFSkin imageFromName:skin.backgroundImage.backgroundImageNormal] forState:UIControlStateNormal];
         }
@@ -118,6 +172,49 @@ static void *kUIView_BFSkinStyle;
         }
     }
     
+}
+
+- (void)resetStyle {
+    self.backgroundColor = self.bf_skinCache.backgroundColorNormal;
+    if (self.bf_skinCache.radius > 0) {
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = self.bf_skinCache.radius;
+    }
+    if ([self isKindOfClass:[UILabel class]]) {
+        UILabel *label = (UILabel *)self;
+        label.textColor = self.bf_skinCache.textColorNormal;
+        label.font = self.bf_skinCache.font;
+    }
+    if ([self isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self;
+        
+        if (self.bf_skinCache.textColorNormal) {
+            [button setTitleColor:self.bf_skinCache.textColorNormal forState:UIControlStateNormal];
+        }
+        if (self.bf_skinCache.textColorPress) {
+            [button setTitleColor:self.bf_skinCache.textColorPress forState:UIControlStateFocused];
+        }
+        if (self.bf_skinCache.textColorDisable) {
+            [button setTitleColor:self.bf_skinCache.textColorDisable forState:UIControlStateDisabled];
+        }
+        
+        if (self.bf_skinCache.backgroundImageNormal) {
+            [button setImage:self.bf_skinCache.backgroundImageNormal forState:UIControlStateNormal];
+        }
+        if (self.bf_skinCache.backgroundImagePress) {
+            [button setImage:self.bf_skinCache.backgroundImagePress forState:UIControlStateFocused];
+        }
+        if (self.bf_skinCache.backgroundImageDisable) {
+            [button setImage:self.bf_skinCache.backgroundImageDisable forState:UIControlStateDisabled];
+        }
+        
+    }
+    if ([self isKindOfClass:[UIImageView class]]) {
+        UIImageView *imageView = (UIImageView *)self;
+        if (self.bf_skinCache.backgroundImageNormal) {
+            imageView.image = self.bf_skinCache.backgroundImageNormal;
+        }
+    }
 }
 
 @end

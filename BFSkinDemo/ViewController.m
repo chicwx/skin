@@ -77,7 +77,7 @@
 }
 
 - (void)defaultClick:(UIButton *)sender {
-    [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Default"];
+    [[BFSkinManager sharedInstance] resetSkinStyle];
 }
 
 #pragma mark - Lazy init
@@ -95,7 +95,7 @@
 - (UIButton *)defaultButton {
     if (!_defaultButton) {
         _defaultButton = [UIButton new];
-        [_defaultButton setTitle:@"Default" forState:UIControlStateNormal];
+        [_defaultButton setTitle:@"Reset" forState:UIControlStateNormal];
         [_defaultButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
         _defaultButton.bf_skinStyle = @"skin_submit_button";
         [_defaultButton addTarget:self action:@selector(defaultClick:) forControlEvents:UIControlEventTouchUpInside];
