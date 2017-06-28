@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSDictionary *skinConfigDictionary;
 @property (nonatomic, strong) NSString *styleId;
+//@property (nonatomic, strong) NSDictionary *globalStyleDictionary;
 
 + (BFSkinManager *)sharedInstance;
 - (void)changeToSkinWithStyleId:(NSString *)styleId;

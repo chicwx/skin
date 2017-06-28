@@ -58,13 +58,14 @@
 }
 
 - (void)performanceTest {
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 20; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(i, 300+i, 100, 50)];
         [button setTitle:[NSString stringWithFormat:@"B%@",@(i)] forState:UIControlStateNormal];
         button.bf_skinStyle = @"skin_submit_button";
         [self.view addSubview:button];
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 350+2*i, 100, 30)];
+        imageView.backgroundColor = [UIColor grayColor];
         imageView.bf_skinStyle = @"skin_index_bottom_image";
         [self.view addSubview:imageView];
     }

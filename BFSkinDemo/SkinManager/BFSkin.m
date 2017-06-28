@@ -10,6 +10,20 @@
 #import "BFSkinManager.h"
 #import "SDImageCache.h"
 
+@implementation BFSkinColor
+
+
+@end
+
+@implementation BFSkinBackgroundColor
+
+
+@end
+
+@implementation BFSkinBackgroundImage
+
+@end
+
 @interface BFSkin ()
 
 //@property (nonatomic, strong) dispatch_queue_t readImageQueue;
@@ -57,9 +71,10 @@
 + (UIImage *)imageFromName:(NSString *)name {
     NSString *resourcePath = [[BFSkinManager sharedInstance] returnResourcePath:[BFSkinManager sharedInstance].styleId];
     NSString *imagePath = [NSString stringWithFormat:@"%@/%@",resourcePath,name];
+    UIImage *image = [UIImage new];
     
     //优先读缓存的图片
-    UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:imagePath];
+    image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:imagePath];
     if (!image) {
         image = [UIImage imageWithContentsOfFile:imagePath];
         [[SDImageCache sharedImageCache] storeImage:image forKey:imagePath completion:nil];
