@@ -48,13 +48,6 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
 }
 
 #pragma mark - Public
-//- (NSDictionary *)globalStyleDictionary {
-//    if (!_globalStyleDictionary) {
-//        _globalStyleDictionary = [self returnGlobalStyle];
-//    }
-//    return _globalStyleDictionary;
-//}
-
 - (void)configDefaultSkin {
     //TODO:默认从bundle解压Skin
     NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"skin"];
@@ -89,15 +82,6 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"Skin/%@/Resource/",styleId]];
     return fullPath;
 }
-
-//- (NSDictionary *)returnGlobalStyle {
-//    NSString *fullPath = [self returnPlistPath:@"Global"];
-//    NSDictionary *styleInfo = [[NSDictionary alloc] init];
-//    if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath]) {
-//        styleInfo = [[NSDictionary alloc] initWithContentsOfFile:fullPath];
-//    }
-//    return styleInfo;
-//}
 
 //从网络下载ZIP资源文件，TODO:
 - (void)downloadSkinResource {

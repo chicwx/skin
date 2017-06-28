@@ -63,19 +63,6 @@ static void *kUIView_BFSkinStyle;
     NSDictionary *styleInfo = [BFSkinManager sharedInstance].skinConfigDictionary[skinStyle];
     BFSkin *skin = [BFSkin yy_modelWithJSON:styleInfo];
     
-//    NSDictionary *globalStyleInfo = [BFSkinManager sharedInstance].globalStyleDictionary;
-//    BFSkin *globalLabelSkin;
-//    BFSkin *globalButtonSkin;
-//    if (globalStyleInfo) {
-//        NSDictionary *globalLabelInfo = [globalStyleInfo objectForKey:@"skin_global_label"];
-//        globalLabelSkin = [BFSkin yy_modelWithJSON:globalLabelInfo];
-//        NSDictionary *globalButtonInfo = [globalStyleInfo objectForKey:@"skin_global_button"];
-//        globalButtonSkin = [BFSkin yy_modelWithJSON:globalButtonInfo];
-//    }
-    
-//    if (globalLabelSkin.backgroundColor) {
-//        self.backgroundColor = [BFSkin colorFromHexString:globalLabelSkin.backgroundColor];
-//    }
     if (skin.backgroundColor.backgroundColorNormal.length > 0) {
         self.backgroundColor = [BFSkin colorFromHexString:skin.backgroundColor.backgroundColorNormal];
     }
