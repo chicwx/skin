@@ -16,7 +16,6 @@ target "BFSkinDemo" do
     pod 'QMUIKit', '1.5.2'
     pod 'SSZipArchive', '1.8.1'
 
-#    pod 'BFBase','0.2.13'
-    pod 'BFBase', :path=>'/Users/yunying/bfbase'
+    pod 'BFBase','0.2.14'
 
 end

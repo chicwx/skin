@@ -13,6 +13,8 @@
 		301DF3831EF9112700CC2797 /* BFSkin.m in Sources */ = {isa = PBXBuildFile; fileRef = 301DF3821EF9112700CC2797 /* BFSkin.m */; };
 		302AF5541EF8CA580038A5E6 /* BFSkinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 302AF5531EF8CA580038A5E6 /* BFSkinManager.m */; };
 		306505B01EF9246000604F39 /* UIView+Skin.m in Sources */ = {isa = PBXBuildFile; fileRef = 306505AF1EF9246000604F39 /* UIView+Skin.m */; };
+		30C941961F049C68004B0D1E /* Dark.skin in Resources */ = {isa = PBXBuildFile; fileRef = 30C941951F049C68004B0D1E /* Dark.skin */; };
+		30C941981F049DDC004B0D1E /* Default.skin in Resources */ = {isa = PBXBuildFile; fileRef = 30C941971F049DDC004B0D1E /* Default.skin */; };
 		30E3C2161EFBB306007567F0 /* BFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E3C1C91EFBB306007567F0 /* BFHomeViewController.m */; };
 		30E3C2181EFBB306007567F0 /* BFCarouselModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E3C1CE1EFBB306007567F0 /* BFCarouselModel.m */; };
 		30E3C2191EFBB306007567F0 /* BFHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E3C1D01EFBB306007567F0 /* BFHomeModel.m */; };
@@ -90,6 +92,8 @@
 		302AF5531EF8CA580038A5E6 /* BFSkinManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFSkinManager.m; sourceTree = "<group>"; };
 		306505AE1EF9246000604F39 /* UIView+Skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Skin.h"; sourceTree = "<group>"; };
 		306505AF1EF9246000604F39 /* UIView+Skin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Skin.m"; sourceTree = "<group>"; };
+		30C941951F049C68004B0D1E /* Dark.skin */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dark.skin; sourceTree = "<group>"; };
+		30C941971F049DDC004B0D1E /* Default.skin */ = {isa = PBXFileReference; lastKnownFileType = file; path = Default.skin; sourceTree = "<group>"; };
 		30E3C1C81EFBB306007567F0 /* BFHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFHomeViewController.h; sourceTree = "<group>"; };
 		30E3C1C91EFBB306007567F0 /* BFHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFHomeViewController.m; sourceTree = "<group>"; };
 		30E3C1CD1EFBB306007567F0 /* BFCarouselModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFCarouselModel.h; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				30E5FEC11F011DDA00E1DB23 /* Skin.skin */,
+				30C941951F049C68004B0D1E /* Dark.skin */,
+				30C941971F049DDC004B0D1E /* Default.skin */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -440,7 +446,7 @@
 				TargetAttributes = {
 					30E5E6D51EF76C6B007A2D36 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = BZJPH34S4P;
+						DevelopmentTeam = S7PACAWFZV;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -472,6 +478,7 @@
 				30E3C2331EFBB306007567F0 /* icon_bell30@2x.png in Resources */,
 				30E3C23C1EFBB306007567F0 /* icon_bell39@2x.png in Resources */,
 				30E3C2311EFBB306007567F0 /* icon_bell29@2x.png in Resources */,
+				30C941981F049DDC004B0D1E /* Default.skin in Resources */,
 				30E3C21E1EFBB306007567F0 /* icon_bell11@2x.png in Resources */,
 				30E3C2341EFBB306007567F0 /* icon_bell31@2x.png in Resources */,
 				30E3C2411EFBB306007567F0 /* icon_bell6@2x.png in Resources */,
@@ -507,6 +514,7 @@
 				30E3C23D1EFBB306007567F0 /* icon_bell3@2x.png in Resources */,
 				30E3C2281EFBB306007567F0 /* icon_bell20@2x.png in Resources */,
 				30E3C2351EFBB306007567F0 /* icon_bell32@2x.png in Resources */,
+				30C941961F049C68004B0D1E /* Dark.skin in Resources */,
 				30E3C22C1EFBB306007567F0 /* icon_bell24@2x.png in Resources */,
 				30E3C2441EFBB306007567F0 /* icon_bell9@2x.png in Resources */,
 				30E3C21D1EFBB306007567F0 /* icon_bell10@2x.png in Resources */,
@@ -721,7 +729,7 @@
 			baseConfigurationReference = 1F5D297D9B96E5A528953021 /* Pods-BFSkinDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S7PACAWFZV;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BFSkinDemo/BFSkin-Prefix.pch";
 				INFOPLIST_FILE = BFSkinDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -771,7 +779,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = BZJPH34S4P;
+				DEVELOPMENT_TEAM = S7PACAWFZV;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BFSkinDemo/BFSkin-Prefix.pch";
 				INFOPLIST_FILE = BFSkinDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

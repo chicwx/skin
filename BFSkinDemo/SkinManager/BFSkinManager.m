@@ -54,18 +54,16 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
 
 - (void)configDefaultSkin {
     //TODO:默认从bundle解压Skin
-    NSString *skinPath = [[NSBundle mainBundle] pathForResource:@"Skin" ofType:@"skin"];
-    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *plistPath = [[BFSkinManager sharedInstance] returnPlistPath:@"Default"];
-    
-    NSLog(@"fullPath = %@",fullPath);
-    
-    //若有则不需再解压
-    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        return;
+    NSString *skinBundlePath = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"skin"];
+    NSString *documentsPath = [BFDeviceUtils applicationDocumentsDirectory];
+    NSString *skinPath = [documentsPath stringByAppendingPathComponent:@"Skin"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:skinPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:skinPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    
-    [SSZipArchive unzipFileAtPath:skinPath toDestination:fullPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+   
+    NSLog(@"skinPath = %@",skinPath);
+
+    [SSZipArchive unzipFileAtPath:skinBundlePath toDestination:skinPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
         
     } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
         [self changeToSkinWithStyleId:@"Default"];
