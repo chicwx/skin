@@ -120,10 +120,10 @@
         self.thirdLabel.text = @"优惠券";
         self.fourthLabel.text = @"交易记录";
         
-        self.firstLabel.bf_skinStyle = self.firstImageView.bf_skinStyle = @"skin_tool_icon_scan";
-        self.secondLabel.bf_skinStyle = self.secondImageView.bf_skinStyle = @"skin_tool_icon_bankcard";
-        self.thirdLabel.bf_skinStyle = self.thirdImageView.bf_skinStyle = @"skin_tool_icon_coupon";
-        self.fourthLabel.bf_skinStyle = self.fourthImageView.bf_skinStyle = @"skin_tool_icon_record";
+        self.firstLabel.bf_skinStyle = @"skin_home_tool_title";
+        self.secondLabel.bf_skinStyle = @"skin_home_tool_title";
+        self.thirdLabel.bf_skinStyle = @"skin_home_tool_title";
+        self.fourthLabel.bf_skinStyle = @"skin_home_tool_title";
 
     }
 }

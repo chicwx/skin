@@ -74,10 +74,15 @@
 #pragma mark - Action
 - (void)darkClick:(UIButton *)sender {
     [[BFSkinManager sharedInstance] changeToSkinWithStyleId:@"Dark"];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)defaultClick:(UIButton *)sender {
-    [[BFSkinManager sharedInstance] resetSkinStyle];
+//    [[BFSkinManager sharedInstance] resetSkinStyle];
+    ViewController *vc = [ViewController new];
+    
+    [self presentViewController:vc animated:YES completion:nil];
+//    [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - Lazy init

@@ -37,7 +37,8 @@
     self.window.rootViewController = navigationControlelr;
     [self.window makeKeyAndVisible];
     
-    [[BFSkinManager sharedInstance] configDefaultSkin];
+//    [[BFSkinManager sharedInstance] configDefaultSkin];
+    [[BFSkinManager sharedInstance] downloadSkinResource];
 
     return YES;
 }

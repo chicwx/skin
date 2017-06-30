@@ -34,9 +34,9 @@
     for (int i = 0; i < 4; i++) {
         BFMenuView *menuView = [[BFMenuView alloc]initWithFrame:CGRectMake(0 + (i % 2) *SCREEN_WIDTH / 2, i / 2 *ADAPT_H(77),SCREEN_WIDTH / 2  , ADAPT_H(77))];
         menuView.titleLabel.text = titleList[i];
-        menuView.titleLabel.bf_skinStyle = @"skin_menu_title";
+        menuView.titleLabel.bf_skinStyle = @"skin_home_menu_title";
         menuView.detalLabel.text = detailList[i];
-        menuView.detalLabel.bf_skinStyle = @"skin_menu_subtitle";
+        menuView.detalLabel.bf_skinStyle = @"skin_home_menu_subtitle";
         menuView.titleImage.bf_skinStyle = imageList[i];
         menuView.tag = 10001 + i;
         [menuView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleMenuTap:)]];

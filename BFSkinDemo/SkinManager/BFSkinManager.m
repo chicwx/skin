@@ -55,12 +55,9 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
 - (void)configDefaultSkin {
     //TODO:默认从bundle解压Skin
     NSString *skinBundlePath = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"skin"];
-    NSString *documentsPath = [BFDeviceUtils applicationDocumentsDirectory];
-    NSString *skinPath = [documentsPath stringByAppendingPathComponent:@"Skin"];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:skinPath]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:skinPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-   
+
+    NSString *skinPath = [self returnSkinPath];
+    
     NSLog(@"skinPath = %@",skinPath);
 
     [SSZipArchive unzipFileAtPath:skinBundlePath toDestination:skinPath progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
@@ -76,29 +73,52 @@ NSString *const kBFSkinUserDefaultConfig = @"kBFSkinUserDefaultConfig";
 }
 
 - (NSString *)returnPlistPath:(NSString *)styleId {
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"Skin/%@/style.plist",styleId]];
+//    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"Skin/%@/style.plist",styleId]];
+    NSString *fullPath = [[self returnSkinPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/style.plist",styleId]];
     return fullPath;
 }
 
 - (NSString *)returnResourcePath:(NSString *)styleId {
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"Skin/%@/Resource/",styleId]];
+    //fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"Skin/%@/Resource/",styleId]];
+
+    NSString *fullPath = [[self returnSkinPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/Resource/",styleId]];
+    
     return fullPath;
+}
+
+- (NSString *)returnSkinPath {
+    NSString *documentsPath = [BFDeviceUtils applicationDocumentsDirectory];
+    NSString *skinPath = [documentsPath stringByAppendingPathComponent:@"Skin"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:skinPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:skinPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return skinPath;
 }
 
 //从网络下载ZIP资源文件，TODO:
 - (void)downloadSkinResource {
     
     NSString *tempPath = [NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
-    NSString *documentPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *skinPath = [self returnSkinPath];
+    __block NSString *fileName = @"";
     
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/SkinDemo/Skin.skin"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://172.31.2.199:8098/SkinDemo/Default.skin"]];
     NSURLSessionDownloadTask *task = [sessionManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        NSLog(@"progress = %@",downloadProgress);
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        return [NSURL fileURLWithPath:documentPath];
+        fileName = response.suggestedFilename;
+        NSString *path = [tempPath stringByAppendingPathComponent:fileName];
+        return [NSURL fileURLWithPath:path];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        [SSZipArchive unzipFileAtPath:tempPath toDestination:documentPath];
+        NSString *filePathString = [filePath path];
+        [SSZipArchive unzipFileAtPath:filePathString toDestination:skinPath];
+        
+        NSArray *array = [fileName componentsSeparatedByString:@"."];
+        NSString *styleName = [array firstObject];
+        if (styleName.length > 0) {
+            [self changeToSkinWithStyleId:styleName];
+        }
+        
     }];
     [task resume];
     

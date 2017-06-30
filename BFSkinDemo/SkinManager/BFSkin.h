@@ -55,8 +55,6 @@
 @property (nonatomic, strong) UIColor *textColorPress;
 @property (nonatomic, strong) UIColor *textColorDisable;
 @property (nonatomic, strong) UIColor *backgroundColorNormal;
-//@property (nonatomic, strong) UIColor *backgroundColorPress;
-//@property (nonatomic, strong) UIColor *backgroundColorDisable;
 @property (nonatomic, strong) UIImage *backgroundImageNormal;
 @property (nonatomic, strong) UIImage *backgroundImagePress;
 @property (nonatomic, strong) UIImage *backgroundImageDisable;

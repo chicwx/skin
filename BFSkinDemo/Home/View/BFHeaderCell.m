@@ -131,7 +131,7 @@
         _headBackImageView = [[UIImageView alloc]init];
         _headBackImageView.image = [UIImage imageNamed:@"bg_header"];
         _headBackImageView.userInteractionEnabled = YES;
-        _headBackImageView.bf_skinStyle = @"skin_index_head_image";
+        _headBackImageView.bf_skinStyle = @"skin_home_head_image";
     }
     return _headBackImageView;
 }
@@ -142,7 +142,7 @@
         _titleLabel.text = @"小黑鱼";
         _titleLabel.textColor = UIColorWhite;
         _titleLabel.font = FONT(17);
-        _titleLabel.bf_skinStyle = @"skin_navigation_title";
+        _titleLabel.bf_skinStyle = @"skin_home_navigation_title";
         [_titleLabel sizeToFit];
     }
     return _titleLabel;
@@ -188,7 +188,7 @@
         _availableTitleLabel.font = FONT(ADAPT_H(12));
         _availableTitleLabel.textColor = RGBACOLOR(255, 255, 255, 0.6);
         [_availableTitleLabel sizeToFit];
-        _availableTitleLabel.bf_skinStyle = @"skin_available_title";
+        _availableTitleLabel.bf_skinStyle = @"skin_home_available_title";
     }
     return _availableTitleLabel;
 }
@@ -198,7 +198,7 @@
         _availableCreditLabel = [[BFLabel alloc]init];
         _availableCreditLabel.textColor = UIColorWhite;
         [_availableCreditLabel sizeToFit];
-        _availableCreditLabel.bf_skinStyle = @"skin_available_credit_title";
+        _availableCreditLabel.bf_skinStyle = @"skin_home_available_credit_title";
     }
     return _availableCreditLabel;
 }
@@ -223,7 +223,7 @@
         _bottomBtn.layer.borderWidth = 1;
         [_bottomBtn setBackgroundColor:CLEARCOLOR];
         [_bottomBtn addTarget:self action:@selector(tapClick) forControlEvents:UIControlEventTouchUpInside];
-        _bottomBtn.bf_skinStyle = @"skin_login_button";
+        _bottomBtn.bf_skinStyle = @"skin_home_login_button";
     }
     return _bottomBtn;
 }
